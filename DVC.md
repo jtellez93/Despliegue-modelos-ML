@@ -25,29 +25,6 @@ Para instalar *DVC* en tu máquina local, puedes utilizar el siguiente comando:
 ```bash
 pip install dvc
 ```
-Intalacion google storage
-```bash
-pip install dvc[gs]
-```
-
-Conectar con google storage
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS="path/to/credentials.json"
-```
-Verificar que se conecto correctamente
-```bash
-echo $GOOGLE_APPLICATION_CREDENTIALS
-```
-
-conectar con el bucket
-```bash
-dvc remote add dataset-track gs://bucket-name/dvc-store
-```
-
-subir los archivos
-```bash
-dvc add dataset/file.csv --to-remote -r dataset-track
-```
 
 ### Comandos básicos
 ![DVC](images/DVC_cheatsheet.png)
