@@ -11,15 +11,6 @@ En este repositorio se encuentra el código necesario para desplegar un modelo d
 
 ![proyecto](images/project.png)
 
-## Estructura del proyecto
-El proyecto se ha estructurado de la siguiente manera:
-- **app**: Contiene el código de la API.
-- **data**: Contiene el dataset de Titanic.
-- **images**: Contiene las imágenes del proyecto.
-- **model**: Contiene el modelo de Machine Learning.
-- **notebooks**: Contiene los notebooks de Jupyter.
-- **src**: Contiene el código de la API.
-
 ## Arquitectura del proyecto
 La arquitectura del proyecto es la siguiente:
 
@@ -32,3 +23,14 @@ se va a trabajar en *Github*, alli vammos a tener 3 activaciones, por medio de *
 2. **CI / CD:** se va a encargar de ejecutar el proceso de integración continua para *Docker* y despliegue continuo hasta *cloud Run* utilizando una *API* basada en *Fast API*.
 
 3. **Entrnamiento:** va a utilizar *Scikit learn* para entrenar un modelo de *Machine Learning*, *Data Version Cotrol (DVC)* para versionar los datos y *Continue Machine Learning* para publicar las metricas de *performance* del modelo.
+
+## Distribucion de archivos
+- **dvc:** contiene los archivos de configuracion de [*DVC*](DVC.md)
+- **github/workflows:** contiene los archivos de configuracion de *github actions*
+- **api:** *API* basada en *Fast API*
+- **dataset:** Archivos del dataset traqueados por *DVC*
+- **model:** Archivos del modelo traqueados por *DVC*
+- **notebooks:** Notebooks de *Jupyter* para el entrenamiento del modelo
+- **src:** Archivos usados para reentrenamiento del modelo
+- **utilities:** Archivos de utilidades especificos para el proyecto
+- **Archivos miscelaneos:** *Dockerfile*
