@@ -26,5 +26,34 @@ Para instalar *DVC* en tu máquina local, puedes utilizar el siguiente comando:
 pip install dvc
 ```
 
+Conecta con *Google cloud storage*
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=$(realpath credentials.json)
+```
+Verifica la conexión
+```bash
+echo $GOOGLE_APPLICATION_CREDENTIALS
+```
+Creamos un bucket en google cloud storage y posteriormente nos conectamos a el, `myremote` es el nombre que le damos a la conexión, debemos crear una para cada tipo de archivo que queramos subir, en este caso subiremos los datos y el modelo.
+
+**Datos**
+```bash
+dvc remote add myremote gs://dvc-storage-bucket/dataset
+```
+**Modelo**
+```bash
+dvc remote add myremote gs://dvc-storage-bucket/model
+```
+
+subimos los datos a myremote
+```bash
+dvc add dataset/myfile.csv --to-remote -r myremote
+```
+
+subimos el modelo a myremote
+```bash
+dvc add model/my_model.pkl --to-remote -r myremote
+```
+
 ### Comandos básicos
 ![DVC](images/DVC_cheatsheet.png)
