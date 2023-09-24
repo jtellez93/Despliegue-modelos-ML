@@ -15,6 +15,6 @@ def get_model() -> Pipeline:
 
 # function to transform the request into a dataframe
 def transform_to_dataframe(class_model: BaseModel) -> DataFrame:
-    transition_dictionary = {key: [value] for key, value in class_model.dict().items()}
+    transition_dictionary = {key: [value] for key, value in class_model.model_dump().items()}
     data_frame = DataFrame(transition_dictionary)
     return data_frame

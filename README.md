@@ -98,8 +98,25 @@ dvc dag
 ```
 
 ## Despliegue de la API
-Para crear la *API* lo hacemos bajo la siguiente estructura:
-- **main:** crea un servicio web que puede recibir solicitudes POST en la ruta `"/v1/prediction"`, y cuando recibe una solicitud, utiliza la función `get_prediction` para realizar una predicción y devuelve la predicción como respuesta en un formato específico definido por `Prediction_Response`.
+Para crear la *API* lo hacemos bajo la siguiente estructura, dentro de una carpeta que nomabramos *api*:
+- **main:** crea un servicio web (*app*) que puede recibir solicitudes POST en la ruta `"/v1/prediction"`, y cuando recibe una solicitud, utiliza la función `get_prediction` para realizar una predicción y devuelve la predicción como respuesta en un formato específico definido por `Prediction_Response`.
 - **views:** Realizar una predicción con la funcion `get_prediction` utilizando un modelo de machine learning previamente cargado y un conjunto de datos proporcionados en la solicitud.
 - **models:** Define dos clases `Prediction_Request` y `Prediction_Response` utilizando el módulo `pydantic`, que se utilizan para definir la estructura de los datos de entrada y salida para un servicio web.
 - **utils:** Archivos de utilidades especificas de la *API*
+
+Para ejecutar la *API* usamos el siguiente codigo
+```bash
+uvicorn api.main:app
+```
+
+## Testing
+Para hacer el *testing* de la *API* lo hacemos bajo la siguiente estructura:
+- **test_1:** Se utiliza para realizar pruebas (mediante funciones de prueba) en una API creada con FastAPI. Estas funciones de prueba se utilizan para verificar el comportamiento de tu API al recibir solicitudes con diferentes datos de entrada. Se aseguran de que la API responda correctamente y que los resultados sean coherentes con los datos de entrada proporcionados.  
+> **Nota:** es mejor práctica llamar a los test con alguno de estos dos patrones: test_*.py o *_test.py. Así solo corriendo el comando `pytest` detectará todos los tests del proyecto.
+
+ejecutar test
+```bash
+pytest # o pytest test_name.py
+```
+
+## Empaquetando *API* con *Docker*
