@@ -1,9 +1,8 @@
-# Model Pipeline Description### imputer: SimpleImputer(strategy='median')
+# Model Pipeline Description 
+### imputer: SimpleImputer(strategy='median')
 
 ### core_model: GradientBoostingRegressor(n_estimators=240)
 
 ### Train score: 0.9715450388332428
-### Test score: 0.7569290271066782
-### Validation score: 0.7648936304735965
-### Model: Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),
-                ('core_model', GradientBoostingRegressor(n_estimators=240))])
+### Test score: 0.7594654094374845
+### Validation score: 0.7676116461083722

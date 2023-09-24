@@ -42,6 +42,7 @@ se va a trabajar en *Github*, alli vammos a tener 3 activaciones, por medio de *
 
 ### Aplicamos DVC para crear flujo de trabajo de reentrenamiento
 
+#### Flujo de trabajo de reentrenamiento
 En versiones anteriores de *DVC* se utilizaba el comando `dvc run` para crear un flujo de trabajo.  
 `-n` asigna un nombre al flujo de trabajo.  
 `label_name` es el nombre del flujo de trabajo.  
@@ -71,8 +72,23 @@ stages:
     outs: # archivos de salida
       - <output>
 ```
+> Nota: DVC utiliza Git para rastrear cambios en los archivos de configuración, pero los datos y resultados generados por DVC deben ser gestionados exclusivamente por DVC para evitar conflictos.
 
-Se ejecuta el comando `dvc repro` para ejecutar las etapas de *DVC*.
+ Para resolver este problema, debes detener el rastreo del archivo en Git
+```bash
+git rm -r  --cached <archivo>
+```
+confirma los cambios
+```bash
+git commit -m "stop tracking <archivo>"
+```
+
+#### Ejecutar flujo de trabajo de reentrenamiento
+Una vez esta todo orquestado, por medio de *DVC* se ejecuta el flujo de trabajo de reentrenamiento.
 ```bash
 dvc repro
+```
+ver los `dags` de *DVC*, estos son los flujos de trabajo que se han ejecutado.
+```bash
+dvc dag
 ```
