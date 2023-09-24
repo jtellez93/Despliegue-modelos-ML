@@ -120,3 +120,18 @@ pytest # o pytest test_name.py
 ```
 
 ## Empaquetando *API* con *Docker*
+Para crear la imagen *Docker* lo hacemos bajo la siguiente estructura
+- **Dockerfile:** Archivo de configuracion de *Docker*
+- **requirements.txt:** Archivo de dependencias de la *API*, se usan las de la *API*.
+- **initializer.sh:** Archivo de inicializacion de la *API*
+
+Para crear la imagen *Docker* ejecutamos el siguiente codigo
+```bash
+DOCKER_BUILDKIT=1 docker build . -t model-api:v1
+```
+> **Nota:** `DOCKER_BUILDKIT=1` es una variable de entorno que se utiliza para mejorar el rendimiento de la compilación de *Docker*, `model-api:v1` es el nombre de la imagen que se va a crear.
+
+Para ejecutar la imagen *Docker* ejecutamos el siguiente codigo
+```bash
+docker run -p 8000:8000 model-api:v1
+```
