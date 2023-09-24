@@ -29,7 +29,7 @@ opening_gross_data = pd.read_csv(StringIO(opening_gross_path))
 #breakpoint() # it will stop the execution here and you can explore the data
 
 # numeric columns
-numeric_columns_mask = (movies_data.dtypes == float) | (movies_data.dtypes == int)
+numeric_columns_mask = (movies_data.dtypes == float) | (movies_data.dtypes == int) | (movies_data.dtypes == 'int64')
 numeric_columns = [column for column in numeric_columns_mask.index if numeric_columns_mask[column]]
 
 # filter columns
