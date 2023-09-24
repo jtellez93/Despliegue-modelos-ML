@@ -44,11 +44,11 @@ se va a trabajar en *Github*, alli vammos a tener 3 activaciones, por medio de *
 
 #### Flujo de trabajo de reentrenamiento
 En versiones anteriores de *DVC* se utilizaba el comando `dvc run` para crear un flujo de trabajo.  
-`-n` asigna un nombre al flujo de trabajo.  
-`label_name` es el nombre del flujo de trabajo.  
-`-o` asigna un archivo de salida.  
-`output` es el archivo de salida.  
-`script` es el script que se va a ejecutar.  
+- `-n` asigna un nombre al flujo de trabajo.  
+- `label_name` es el nombre del flujo de trabajo.  
+- `-o` asigna un archivo de salida.  
+- `output` es el archivo de salida.  
+- `script` es el script que se va a ejecutar.  
 
 ```bash	
 dvc run -n <label_name> -o <output> python <script>
@@ -88,9 +88,18 @@ Una vez esta todo orquestado, por medio de *DVC* se ejecuta el flujo de trabajo 
 ```bash
 dvc repro
 ```
+forzar la ejecucion del flujo
+```bash
+dvc repro -f
+```
 ver los `dags` de *DVC*, estos son los flujos de trabajo que se han ejecutado.
 ```bash
 dvc dag
 ```
 
 ## Despliegue de la API
+Para crear la *API* lo hacemos bajo la siguiente estructura:
+- **main:** crea un servicio web que puede recibir solicitudes POST en la ruta `"/v1/prediction"`, y cuando recibe una solicitud, utiliza la función `get_prediction` para realizar una predicción y devuelve la predicción como respuesta en un formato específico definido por `Prediction_Response`.
+- **views:** Realizar una predicción con la funcion `get_prediction` utilizando un modelo de machine learning previamente cargado y un conjunto de datos proporcionados en la solicitud.
+- **models:** Define dos clases `Prediction_Request` y `Prediction_Response` utilizando el módulo `pydantic`, que se utilizan para definir la estructura de los datos de entrada y salida para un servicio web.
+- **utils:** Archivos de utilidades especificas de la *API*
