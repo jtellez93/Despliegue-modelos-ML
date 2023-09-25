@@ -157,4 +157,6 @@ Se descarga el archivo *json* con las credenciales y se codifica en `base64` (es
 base64 <file>
 ```
 
-Se crea un secreto en *Github* con el nombre `GCP_SA_KEY` y se pega el resultado de la codificacion en `base64`.
+Se crea un secreto en *Github* con el nombre `NAME_KEY` y se pega el resultado de la codificacion en `base64`.
+
+> **Nota:** Una vez finalizado se debe hacer `push` al repositorio remoto.
