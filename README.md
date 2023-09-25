@@ -135,3 +135,26 @@ Para ejecutar la imagen *Docker* ejecutamos el siguiente codigo
 ```bash
 docker run -p 8000:8000 model-api:v1
 ```
+
+## Despliegue de la *API* en *Github Actions*
+*Github Actions* es un servicio de integración continua que se puede utilizar para automatizar el flujo de trabajo de desarrollo de software. Se puede utilizar para compilar, probar y desplegar tu código cada vez que se realiza un cambio en el repositorio de código.
+
+- **github/workflow:** contiene los archivos de configuracion de *github actions*
+- **testing:** contiene la configuracion de *github actions* para el *testing* de la *API*
+- **utilities/setter.py:** decodifica la clave de acceso a *Google cloud storage* para ser usada en el flujo de trabajo de *github actions*
+
+### Credenciales
+En este proyecto se utilizan credenciales para acceder a *Google cloud storage* y *Google cloud run*, para esto se utilizan *Github secrets*.
+
+En *GCP* se crea un servicio de cuenta de servicio con los siguientes permisos:
+- *Storage Admin*
+- *Cloud Run Admin*
+- *Artifact Registry Admin* 
+- *Service Account User*
+
+Se descarga el archivo *json* con las credenciales y se codifica en `base64` (esto porque no se pueden guardar archivos en *Github secrets*), para esto se utiliza el siguiente codigo
+```bash
+base64 <file>
+```
+
+Se crea un secreto en *Github* con el nombre `GCP_SA_KEY` y se pega el resultado de la codificacion en `base64`.
