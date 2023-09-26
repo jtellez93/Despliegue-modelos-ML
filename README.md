@@ -160,3 +160,10 @@ base64 <file>
 Se crea un secreto en *Github* con el nombre `NAME_KEY` y se pega el resultado de la codificacion en `base64`.
 
 > **Nota:** Una vez finalizado se debe hacer `push` al repositorio remoto.
+
+## Entretenimiento continuo
+Para el reentrenamiento continuo del modelo se utiliza *Github Actions* y *DVC*.
+
+- **continuous_training:** contiene la configuracion de *github actions* para el reentrenamiento continuo del modelo.
+
+Este flujo de trabajo automatiza el proceso de entrenamiento de un modelo de aprendizaje automático y su actualización periódica. También incluye la generación de informes y la publicación de métricas en el repositorio de GitHub. El flujo de trabajo se puede desencadenar tanto según una programación predefinida como de forma manual mediante la interfaz de GitHub Actions.
