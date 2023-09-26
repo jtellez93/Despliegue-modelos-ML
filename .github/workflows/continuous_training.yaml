@@ -32,7 +32,7 @@ jobs:
 
           echo "Training finished!"
 
-          dvc add model/model.pkl.dvc -r model-track --to-remote
+          dvc add model/model.pkl -r model-track --to-remote
           dvc push model/model.pkl.dvc -r model-track
 
       - name: Commit .dvc file changes
