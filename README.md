@@ -161,21 +161,23 @@ Se crea un secreto en *Github* con el nombre `NAME_KEY` y se pega el resultado d
 
 > **Nota:** Una vez finalizado se debe hacer `push` al repositorio remoto.
 
+```bash	
+git push origin branch_name
+```
+
 ## Entretenimiento continuo
 Para el reentrenamiento continuo del modelo se utiliza *Github Actions* y *DVC*.
 
-- **continuous_training:** contiene la configuracion de *github actions* para el reentrenamiento continuo del modelo.
+- **continuous_training:** contiene la configuracion de *github actions* para el reentrenamiento continuo del modelo. ([Estructura archivo *.yaml*](yaml.md))
 
 Este flujo de trabajo automatiza el proceso de entrenamiento de un modelo de aprendizaje automático y su actualización periódica. También incluye la generación de informes y la publicación de métricas en el repositorio de GitHub. El flujo de trabajo se puede desencadenar tanto según una programación predefinida como de forma manual mediante la interfaz de GitHub Actions.
 
 ### Pasos aplicados en el flujo de trabajo
-- **checkout:** descarga el repositorio de GitHub.
-- **setup python:** configura el entorno de Python.
-- **setup dvc:** configura el entorno de DVC.
-- **get data:** descarga los datos de entrenamiento.
-- **prepare data:** prepara los datos de entrenamiento.
-- **train model:** entrena el modelo.
-- **evaluate model:** evalua el modelo.
-- **save model:** guarda el modelo.
-- **save metrics:** guarda las metricas.
-- **push metrics:** publica las metricas en el repositorio de GitHub.
+- **Checkout repo:** clona el repositorio.
+- **Train model:** entrena el modelo.
+  - **setup python:** configura el entorno de Python.
+  - **install dependencies:** instala las dependencias del proyecto.
+  - **setup DVC:** configura el entorno de *DVC*.
+  - **Update model:** actualiza el modelo en *DVC*.
+- **Commit .dvc files:** hace `commit` de los archivos de *DVC* en *Github*.
+- **Publish metrics:** publica las metricas del modelo en *Github*.
