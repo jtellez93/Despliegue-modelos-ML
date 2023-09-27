@@ -52,4 +52,4 @@ jobs:
         run: |
           cat report.txt >> report.md
           cml comment performance.png --md >> report.md
-          cml-send-comment report.md
+          cml send-comment report.md
