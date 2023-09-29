@@ -45,9 +45,8 @@ jobs:
         #with:
           #github_token: ${{ secrets.GITHUB_TOKEN }}
           #branch: ${{ github.ref }}
-
+      - uses: iterative/setup-cml@v1
       - name: Create CML report
-        uses: iterative/setup-cml@v1
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
