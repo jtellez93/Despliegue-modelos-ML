@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
       - name: Train model
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
@@ -41,12 +42,13 @@ jobs:
           #git config --local user.name "github-actions[bot]"
           #git add model/model.pkl.dvc
           #git commit -m "Updating model serialization"
-      #- uses: ad-m/github-push-action@master
+        #uses: ad-m/github-push-action@master
         #with:
           #github_token: ${{ secrets.GITHUB_TOKEN }}
           #branch: ${{ github.ref }}
+  
       - name: Create CML report
-      - uses: iterative/setup-cml@v1
+        uses: iterative/setup-cml@v1
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
