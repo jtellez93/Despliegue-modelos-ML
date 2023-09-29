@@ -52,4 +52,5 @@ jobs:
           REPO_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
         run: |
           cat report.txt >> report.md
+          cml publish performance.png --md >> report.md
           cml comment create report.md
