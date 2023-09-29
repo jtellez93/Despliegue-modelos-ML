@@ -51,5 +51,5 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cat report.txt >> report.md
-          echo "![Image](URL_DE_LA_IMAGEN)" >> report.md
+          echo '![](./performance.png "Model Performance")' >> report.md
           cml comment create report.md
