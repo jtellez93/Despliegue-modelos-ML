@@ -2,34 +2,34 @@ name: Continuous-integration/Coninuous-Deployment
 on: [push]
 jobs:
   ci_cd: 
-  runs-on: ubuntu-latest
-  env:
-    REGISTRY_NAME: ${{ secrets.REGISTRY_NAME }}
-    REGION: ${{ secrets.REGION }}
-    PROJECT_ID: ${{ secrets.PROJECT_ID }}
-    SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
-    SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY_NAME: ${{ secrets.REGISTRY_NAME }}
+      REGION: ${{ secrets.REGION }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+      SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
   
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
-    - name: Set environment and bring the model
-      run: |
-        python3 -m venv venv
-        source venv/bin/activate
-        piup install dvc[gs]
-        export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
-        dvc pull model/model.pkl.dvc -r model-track
-    - name: set up GCLOUD SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
-        project_id: ${{ env.PROYECT_ID }}
-    - name: Build and push
-      run: |
-        docker build . -t $REGISTRY_NAME:$GITHUB_SHA
-        gcloud auth configure-docker -q
-        sudo -u $USER docker push $REGISTRY_NAME:$GITHUB_SHA
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run services update $SERVICE_NAME --region=$REGION --image=$REGISTRY_NAME:$GITHUB_SHA
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Set environment and bring the model
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          piup install dvc[gs]
+          export GOOGLE_APPLICATION_CREDENTIALS=$(python utilities/setter.py)
+          dvc pull model/model.pkl.dvc -r model-track
+      - name: set up GCLOUD SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ env.PROYECT_ID }}
+      - name: Build and push
+        run: |
+          docker build . -t $REGISTRY_NAME:$GITHUB_SHA
+          gcloud auth configure-docker -q
+          sudo -u $USER docker push $REGISTRY_NAME:$GITHUB_SHA
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run services update $SERVICE_NAME --region=$REGION --image=$REGISTRY_NAME:$GITHUB_SHA
