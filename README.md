@@ -181,3 +181,40 @@ Este flujo de trabajo automatiza el proceso de entrenamiento de un modelo de apr
   - **Update model:** actualiza el modelo en *DVC*.
 - **Commit .dvc files:** hace `commit` de los archivos de *DVC* en *Github*.
 - **Publish metrics:** publica las metricas del modelo en *Github*.
+
+## Continuos Integration / Continuos Deployment (CI/CD)
+Para el *CI/CD* se utiliza *Github Actions* y *Docker*.
+
+- **ci_cd:** contiene la configuracion de *github actions* para el *CI/CD* de la *API*.
+
+Este flujo de trabajo automatiza el proceso de compilación de una imagen de *Docker*, su publicación en un registro de artefactos y su implementación en *Cloud Run*. El flujo de trabajo se puede desencadenar tanto según una programación predefinida como de forma manual mediante la interfaz de *GitHub Actions*.
+
+### Pasos aplicados en el flujo de trabajo
+- **Checkout repo:** clona el repositorio.
+- **Set environment and bring the model:** configura el entorno y trae el modelo.
+  - **setup python:** configura el entorno de Python.
+  - **setup DVC:** configura el entorno de *DVC*.
+  - **Pull model:** trae el modelo de *DVC*.
+  - **set up GCLOUD SDK:** configura el entorno de *GCP*.
+  - **Build and push:** construye y publica la imagen de *Docker* en *GCP*.
+  - **Deploy to Cloud Run:** despliega la imagen de *Docker* en *Cloud Run*.
+
+> **Nota:** *Cloud Run* es un servicio de *GCP* que permite desplegar contenedores de *Docker* de forma sencilla y rápida.
+
+> **Nota:** Una vez finalizado se debe hacer `push` al repositorio remoto, posteriormente se debe hacer merge con la rama `main` (ouede ser directo desde *Github*).
+
+## Prueba de End Point
+Para probar el *End Point* de la *API* se utiliza el archivo `prueba_endpoint.py`, este archivo contiene la url del *End Point* y los datos de entrada para la prueba.
+
+Para ejecutar el archivo `prueba_endpoint.py` se utiliza el siguiente codigo
+```bash
+python prueba_endpoint.py
+```
+En el breakpoint se puede ver la respuesta de la *API*.
+```bash
+response = requests.post(url, json=data)
+```
+
+```bash
+response.json()
+```
